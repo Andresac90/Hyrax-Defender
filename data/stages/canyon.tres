@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="StageData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/stage_data.gd" id="1_stage"]
+
+[resource]
+script = ExtResource("1_stage")
+id = &"canyon"
+display_name = "Canyon"
+description = "Tall red walls and plenty of eagles diving from above."
+rng_seed = 1101
+duration_sec = 180.0
+eagle_weight = 1.6
+leopard_weight = 0.8
+snake_weight = 0.6
+rock_weight = 1.0
+rush_chance = 0.12
+ground_color = Color(0.7, 0.42, 0.28, 1)
+prop_color = Color(0.62, 0.34, 0.22, 1)
+prop_density = 0.8

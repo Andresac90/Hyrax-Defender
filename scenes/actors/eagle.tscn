@@ -1,0 +1,65 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/actors/predator.gd" id="1_predator"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_feathers"]
+albedo_color = Color(0.32, 0.21, 0.12, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_head"]
+albedo_color = Color(0.95, 0.93, 0.88, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_marker"]
+shading_mode = 0
+albedo_color = Color(1, 0.15, 0.1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_body"]
+material = SubResource("StandardMaterial3D_feathers")
+radius = 0.35
+height = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_wings"]
+material = SubResource("StandardMaterial3D_feathers")
+size = Vector3(2.4, 0.06, 0.55)
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+material = SubResource("StandardMaterial3D_head")
+radius = 0.16
+height = 0.32
+
+[sub_resource type="SphereMesh" id="SphereMesh_marker"]
+material = SubResource("StandardMaterial3D_marker")
+radius = 0.15
+height = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hit"]
+radius = 1.0
+
+[node name="Eagle" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_predator")
+speed = 5.0
+points = 150
+can_rush = false
+flies = true
+spawn_side_distance = 6.0
+spawn_height = 9.0
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_body")
+
+[node name="Wings" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.1, 0)
+mesh = SubResource("BoxMesh_wings")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.2, -0.38)
+mesh = SubResource("SphereMesh_head")
+
+[node name="ThreatMarker" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.8, 0)
+mesh = SubResource("SphereMesh_marker")
+
+[node name="HitShape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_hit")

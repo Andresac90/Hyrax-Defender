@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="StageData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/stage_data.gd" id="1_stage"]
+
+[resource]
+script = ExtResource("1_stage")
+id = &"rocky_outcrop"
+display_name = "Rocky Outcrop"
+description = "Fast and dense: every predator type, falling rocks, and frequent rushes."
+rng_seed = 3303
+duration_sec = 220.0
+encounter_interval_min = 1.8
+encounter_interval_max = 3.0
+hyrax_exposure_time = 4.0
+eagle_weight = 1.0
+leopard_weight = 1.0
+snake_weight = 1.0
+rock_weight = 0.8
+rush_chance = 0.25
+ground_color = Color(0.52, 0.5, 0.46, 1)
+prop_color = Color(0.45, 0.44, 0.42, 1)
+prop_density = 0.7

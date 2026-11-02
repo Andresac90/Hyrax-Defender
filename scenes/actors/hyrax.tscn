@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/actors/hyrax.gd" id="1_hyrax"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fur"]
+albedo_color = Color(0.58, 0.43, 0.29, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eye"]
+albedo_color = Color(0.05, 0.05, 0.05, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_torso"]
+material = SubResource("StandardMaterial3D_fur")
+radius = 0.32
+height = 0.9
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+material = SubResource("StandardMaterial3D_fur")
+radius = 0.24
+height = 0.42
+
+[sub_resource type="SphereMesh" id="SphereMesh_eye"]
+material = SubResource("StandardMaterial3D_eye")
+radius = 0.04
+height = 0.08
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hit"]
+radius = 0.55
+
+[node name="Hyrax" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_hyrax")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Torso" type="MeshInstance3D" parent="Body"]
+position = Vector3(0, 0.32, 0)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("CapsuleMesh_torso")
+
+[node name="Head" type="MeshInstance3D" parent="Body"]
+position = Vector3(0, 0.5, -0.4)
+mesh = SubResource("SphereMesh_head")
+
+[node name="EyeL" type="MeshInstance3D" parent="Body"]
+position = Vector3(-0.1, 0.56, -0.6)
+mesh = SubResource("SphereMesh_eye")
+
+[node name="EyeR" type="MeshInstance3D" parent="Body"]
+position = Vector3(0.1, 0.56, -0.6)
+mesh = SubResource("SphereMesh_eye")
+
+[node name="HitShape" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.4, 0)
+shape = SubResource("SphereShape3D_hit")

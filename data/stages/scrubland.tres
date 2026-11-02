@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="StageData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/stage_data.gd" id="1_stage"]
+
+[resource]
+script = ExtResource("1_stage")
+id = &"scrubland"
+display_name = "Scrubland"
+description = "Dry brush hides snakes and stalking leopards."
+rng_seed = 2202
+duration_sec = 200.0
+eagle_weight = 0.7
+leopard_weight = 1.2
+snake_weight = 1.4
+rock_weight = 0.2
+rush_chance = 0.18
+ground_color = Color(0.6, 0.56, 0.34, 1)
+prop_color = Color(0.36, 0.42, 0.22, 1)
+prop_density = 0.55

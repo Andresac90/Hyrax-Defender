@@ -1,0 +1,64 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/game/level.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="2_hud"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.32, 0.55, 0.85, 1)
+sky_horizon_color = Color(0.86, 0.79, 0.66, 1)
+ground_bottom_color = Color(0.35, 0.28, 0.2, 1)
+ground_horizon_color = Color(0.86, 0.79, 0.66, 1)
+
+[sub_resource type="Sky" id="Sky_main"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 2
+sky = SubResource("Sky_main")
+ambient_light_source = 3
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.86, 0.79, 0.66, 1)
+fog_density = 0.006
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(1500, 1500)
+
+[sub_resource type="Curve3D" id="Curve3D_rail"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, -25, 0, 1.7, 0, 0, 0, 25, 0, 0, -25, 10, 1.7, -90, 0, 0, 25, 0, 0, -25, -6, 2.4, -190, 0, 0, 25, 0, 0, -25, 8, 2, -290, 0, 0, 25, 0, 0, 0, 0, 1.7, -400),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_level")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_main")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.9, 0.6, 0)
+shadow_enabled = true
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0, -200)
+mesh = SubResource("PlaneMesh_ground")
+
+[node name="Rail" type="Path3D" parent="."]
+curve = SubResource("Curve3D_rail")
+
+[node name="RailFollow" type="PathFollow3D" parent="Rail"]
+position = Vector3(0, 1.7, 0)
+loop = false
+
+[node name="Camera3D" type="Camera3D" parent="Rail/RailFollow"]
+rotation = Vector3(-0.12, 0, 0)
+current = true
+fov = 70.0
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="Actors" type="Node3D" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("2_hud")]
