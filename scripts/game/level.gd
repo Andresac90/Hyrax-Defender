@@ -59,7 +59,7 @@ var _pending_shots: Array[Vector2] = []
 func _ready() -> void:
 	# Falls back to the first stage so the scene can be run directly with F6.
 	_stage = GameState.stage if GameState.stage != null else GameState.STAGES[0]
-	_rng.seed = _stage.rng_seed
+	_rng.randomize()
 	_apply_stage_look()
 	_scatter_props()
 	_next_encounter_time = _stage.first_encounter_delay
@@ -151,7 +151,7 @@ func _spawn_encounter() -> void:
 func _pick_threat() -> int:
 	return _rng.rand_weighted(PackedFloat32Array([
 		_stage.eagle_weight,
-		_stage.leopard_weight,
+		_stage.leopard_weight *5.0,
 		_stage.snake_weight,
 		_stage.rock_weight,
 	]))

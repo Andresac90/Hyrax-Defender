@@ -1,8 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://i54cw7x3yv67"]
 
-[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Script" uid="uid://bvbq4hngbrvcf" path="res://scripts/ui/main_menu.gd" id="1_menu"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1868118926]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_menu")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=201234320]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +21,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.2, 0.14, 0.1, 1)
 
-[node name="Center" type="CenterContainer" parent="."]
+[node name="Center" type="CenterContainer" parent="." unique_id=1482181196]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,40 +29,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="Center"]
+[node name="VBox" type="VBoxContainer" parent="Center" unique_id=2127693230]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="Center/VBox"]
+[node name="Title" type="Label" parent="Center/VBox" unique_id=578501064]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.88, 0.6, 1)
 theme_override_font_sizes/font_size = 104
 text = "HYRAX DEFENDER"
 horizontal_alignment = 1
 
-[node name="Studio" type="Label" parent="Center/VBox"]
+[node name="Studio" type="Label" parent="Center/VBox" unique_id=665206889]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.75, 0.6, 1)
 theme_override_font_sizes/font_size = 28
 text = "Studio Awawas"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="Center/VBox"]
+[node name="Spacer" type="Control" parent="Center/VBox" unique_id=783628679]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="Prompt" type="Label" parent="Center/VBox"]
+[node name="Prompt" type="Label" parent="Center/VBox" unique_id=2486342]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Choose a stage"
 horizontal_alignment = 1
 
-[node name="StageList" type="VBoxContainer" parent="Center/VBox"]
+[node name="StageList" type="VBoxContainer" parent="Center/VBox" unique_id=1049570116]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 12
 
-[node name="Controls" type="Label" parent="Center/VBox"]
+[node name="Controls" type="Label" parent="Center/VBox" unique_id=1166617868]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.75, 0.7, 1)
 theme_override_font_sizes/font_size = 22
@@ -70,7 +70,7 @@ text = "Left click: flash-pellet   ·   Right click / Space / R: reload   ·   E
 Tag predators and rocks. Never shoot the hyraxes!"
 horizontal_alignment = 1
 
-[node name="QuitButton" type="Button" parent="Center/VBox"]
+[node name="QuitButton" type="Button" parent="Center/VBox" unique_id=319681109]
 custom_minimum_size = Vector2(240, 56)
 layout_mode = 2
 size_flags_horizontal = 4
