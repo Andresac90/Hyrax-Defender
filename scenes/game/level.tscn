@@ -1,7 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://2n0rj3fmfn5v"]
 
-[ext_resource type="Script" path="res://scripts/game/level.gd" id="1_level"]
+[ext_resource type="Script" uid="uid://nnni2brcnt6f" path="res://scripts/game/level.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="2_hud"]
+[ext_resource type="AudioStream" uid="uid://dl1tiggcp7a62" path="res://assets/audio/gunshot.mp3" id="3_dtmi3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
 sky_top_color = Color(0.32, 0.55, 0.85, 1)
@@ -31,34 +32,37 @@ _data = {
 }
 point_count = 5
 
-[node name="Level" type="Node3D"]
+[node name="Level" type="Node3D" unique_id=1351510143]
 script = ExtResource("1_level")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=405728663]
 environment = SubResource("Environment_main")
 
-[node name="Sun" type="DirectionalLight3D" parent="."]
-rotation = Vector3(-0.9, 0.6, 0)
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1409875021]
+transform = Transform3D(0.8253356, -0.44229966, 0.3509874, 0, 0.62161, 0.7833269, -0.5646425, -0.6465076, 0.51303685, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Ground" type="MeshInstance3D" parent="."]
-position = Vector3(0, 0, -200)
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1660055772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
 mesh = SubResource("PlaneMesh_ground")
 
-[node name="Rail" type="Path3D" parent="."]
+[node name="Rail" type="Path3D" parent="." unique_id=2142833070]
 curve = SubResource("Curve3D_rail")
 
-[node name="RailFollow" type="PathFollow3D" parent="Rail"]
-position = Vector3(0, 1.7, 0)
+[node name="RailFollow" type="PathFollow3D" parent="Rail" unique_id=293006183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 loop = false
 
-[node name="Camera3D" type="Camera3D" parent="Rail/RailFollow"]
-rotation = Vector3(-0.12, 0, 0)
+[node name="Camera3D" type="Camera3D" parent="Rail/RailFollow" unique_id=880257573]
+transform = Transform3D(1, 0, 0, 0, 0.99280864, 0.119712204, 0, -0.119712204, 0.99280864, 0, 0, 0)
 current = true
 fov = 70.0
 
-[node name="Props" type="Node3D" parent="."]
+[node name="Props" type="Node3D" parent="." unique_id=896663249]
 
-[node name="Actors" type="Node3D" parent="."]
+[node name="Actors" type="Node3D" parent="." unique_id=218452137]
 
-[node name="HUD" parent="." instance=ExtResource("2_hud")]
+[node name="HUD" parent="." unique_id=164347449 instance=ExtResource("2_hud")]
+
+[node name="GunshotSound" type="AudioStreamPlayer" parent="." unique_id=1732286482]
+stream = ExtResource("3_dtmi3")

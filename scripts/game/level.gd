@@ -1,3 +1,4 @@
+
 extends Node3D
 ## Runs a stage: carries the camera along the rail, spawns hyrax encounters and
 ## resolves the player's shots.
@@ -7,11 +8,21 @@ enum Threat { EAGLE, LEOPARD, SNAKE, ROCK }
 
 const HYRAX_SCENE := preload("res://scenes/actors/hyrax.tscn")
 const ROCK_SCENE := preload("res://scenes/actors/falling_rock.tscn")
+
 const PREDATOR_SCENES := {
 	Threat.EAGLE: preload("res://scenes/actors/eagle.tscn"),
 	Threat.LEOPARD: preload("res://scenes/actors/leopard.tscn"),
 	Threat.SNAKE: preload("res://scenes/actors/snake.tscn"),
 }
+
+#  Additional animals
+const FOUR_LEGGED_SCENES := [
+	preload("res://scenes/actors/leopard.tscn"),
+	preload("res://scenes/actors/lion.tscn"),
+	preload("res://scenes/actors/tiger.tscn"),
+	preload("res://scenes/actors/elephant.tscn"),
+	preload("res://scenes/actors/hippo.tscn"),
+]
 
 const TARGETS_MASK := 1 << 1  # Physics layer 2, "targets".
 const SHOT_RANGE := 200.0
@@ -41,6 +52,8 @@ var _pending_shots: Array[Vector2] = []
 @onready var _props: Node3D = $Props
 @onready var _actors: Node3D = $Actors
 @onready var _hud: GameHUD = $HUD
+@onready var _gunshot_sound: AudioStreamPlayer = $GunshotSound
+
 
 
 func _ready() -> void:
@@ -89,6 +102,9 @@ func _physics_process(_delta: float) -> void:
 func _fire(screen_position: Vector2) -> void:
 	if not GameState.try_fire():
 		return
+	
+	_gunshot_sound.play()
+	
 	var origin := _camera.project_ray_origin(screen_position)
 	var direction := _camera.project_ray_normal(screen_position)
 	var query := PhysicsRayQueryParameters3D.create(origin, origin + direction * SHOT_RANGE, TARGETS_MASK)
@@ -154,7 +170,17 @@ func _spawn_threat(threat: int, prey, side: Vector3, will_rush: bool) -> void:
 		rock.setup(prey)
 		return
 
-	var predator: Predator = PREDATOR_SCENES[threat].instantiate()
+	# Randomly select one of the animals
+	var predator_scene: PackedScene
+
+	if threat == Threat.LEOPARD:
+		predator_scene = FOUR_LEGGED_SCENES[
+			_rng.randi_range(0, FOUR_LEGGED_SCENES.size() - 1)
+		]
+	else:
+		predator_scene = PREDATOR_SCENES[threat]
+
+	var predator: Predator = predator_scene.instantiate()
 	_actors.add_child(predator)
 	predator.global_position = origin + side * predator.spawn_side_distance + Vector3.UP * predator.spawn_height
 	predator.setup(prey, _camera, will_rush)

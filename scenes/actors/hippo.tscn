@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://bvwlnyt31pa0d"]
+
+[ext_resource type="Script" uid="uid://eytc5lh8gy58" path="res://scripts/actors/predator.gd" id="1_qqn0t"]
+[ext_resource type="PackedScene" uid="uid://d2scqe5i8oqps" path="res://assets/animal/hippo.glb" id="2_qqn0t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_coat"]
+albedo_color = Color(0.86, 0.66, 0.26, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_torso"]
+material = SubResource("StandardMaterial3D_coat")
+radius = 0.3
+height = 1.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+material = SubResource("StandardMaterial3D_coat")
+radius = 0.26
+height = 0.48
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tail"]
+material = SubResource("StandardMaterial3D_coat")
+radius = 0.06
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_marker"]
+shading_mode = 0
+albedo_color = Color(1, 0.15, 0.1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_marker"]
+material = SubResource("StandardMaterial3D_marker")
+radius = 0.15
+height = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hit"]
+radius = 0.9
+
+[node name="Hippo" type="Area3D" unique_id=1921455719]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_qqn0t")
+speed = 4.5
+spawn_side_distance = 11.0
+
+[node name="Torso" type="MeshInstance3D" parent="." unique_id=1863533439]
+transform = Transform3D(1, 0, 0, 0, -3.6199901e-06, -1, 0, 1, -3.6199901e-06, 0, 0.55, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_torso")
+
+[node name="Head" type="MeshInstance3D" parent="." unique_id=1880040839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.85)
+visible = false
+mesh = SubResource("SphereMesh_head")
+
+[node name="Tail" type="MeshInstance3D" parent="." unique_id=774714312]
+transform = Transform3D(1, 0, 0, 0, 0.4535961, -0.8912074, 0, 0.8912074, 0.4535961, 0, 0.75, 1.1)
+visible = false
+mesh = SubResource("CapsuleMesh_tail")
+
+[node name="ThreatMarker" type="MeshInstance3D" parent="." unique_id=1269451502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("SphereMesh_marker")
+
+[node name="HitShape" type="CollisionShape3D" parent="." unique_id=624099880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("SphereShape3D_hit")
+
+[node name="hippo2" parent="." unique_id=164611442 instance=ExtResource("2_qqn0t")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
